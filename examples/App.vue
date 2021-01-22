@@ -5,6 +5,7 @@
                  :moddleExtensions="moddleExtensions"
                  :translate="translate"
                  :palette="palette"
+                 :context-pad="contextPad"
                  @click="click"
                  @hover="hover"
                  @out="out"
@@ -22,6 +23,10 @@ import catImage from './cat-image'
 export default {
   data () {
     return {
+      modeler: {
+        xmlData: "",
+        svgImage: ""
+      },
       moddleExtensions: { demo },
       translate: {
         'Activate the hand tool': 'Mover',
@@ -48,9 +53,16 @@ export default {
           imageUrl: catImage
         }
       },
-      modeler: {
-        xmlData: "",
-        svgImage: ""
+      contextPad (element) {
+        if (element.$type === 'bpmn:StartEvent') {
+          return {
+            'append.demoCat': {
+              type: 'demo:cat',
+              title: 'Append demoCat',
+              imageUrl: catImage
+            }
+          }
+        }
       }
     }
   },

@@ -17,7 +17,7 @@ export default {
     diagramXML: String,
     moddleExtensions: { type: Object },
     palette: { type: Object },
-    contextPad: { type: Object },
+    contextPad: { type: Function },
     translate: { type: Object }
   },
   data () {
