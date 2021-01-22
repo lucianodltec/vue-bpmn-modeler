@@ -2,20 +2,20 @@
  * 自定义工具栏
  */
 export default class CustomPalette {
-  constructor(create, elementFactory, palette, translate, actions) {
+  constructor (create, elementFactory, palette, translate, actions) {
     this.create = create
     this.elementFactory = elementFactory
     this.translate = translate
     this.actions = actions
     palette.registerProvider(this)
-    
+
   }
 
-  getPaletteEntries() {
-    const { create, elementFactory, translate, actions } = this
+  getPaletteEntries () {
+    const { create, elementFactory, translate, actions, handTool } = this
 
     // 自定义用户任务
-    function createUserTask(event) {
+    function createUserTask (event) {
       const shape = elementFactory.createShape({ type: "bpmn:UserTask" })
       create.start(event, shape)
     }

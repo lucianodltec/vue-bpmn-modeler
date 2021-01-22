@@ -42,6 +42,9 @@ export default {
     ]
     this.modeler = new BpmnModeler({
       container: canvas,
+      keyboard: {
+        bindTo: window
+      },
       additionalModules: additionalModules,
       cli: {
         bindTo: 'cli'
@@ -167,21 +170,6 @@ export default {
               });
             });
 
-            // modeling.updateProperties(rootElement, {
-            //   // isExecutable: true
-            // });
-            // 设定开始节点名称和结束节点名称
-            rootElement.children.forEach(n => {
-              if (n.type === 'bpmn:StartEvent') {
-                modeling.updateProperties(n, {
-                  name: 'Início',
-                });
-              } else if (n.type === 'bpmn:EndEvent') {
-                modeling.updateProperties(n, {
-                  name: 'Fim',
-                });
-              }
-            })
             resolve();
           });
         }

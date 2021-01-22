@@ -6,11 +6,16 @@ import {
   assign
 } from 'min-dash';
 
-export default function PaletteProvider(palette, create, elementFactory, translate) {
+export default function PaletteProvider (palette, create, elementFactory, translate, handTool, lassoTool, spaceTool, globalConnect) {
 
   this._create = create;
   this._elementFactory = elementFactory;
   this._translate = translate;
+  this._handTool = handTool;
+  this._lassoTool = lassoTool;
+  this._spaceTool = spaceTool;
+  this._globalConnect = globalConnect;
+
   palette.registerProvider(this);
 }
 
@@ -18,20 +23,27 @@ PaletteProvider.$inject = [
   'palette',
   'create',
   'elementFactory',
-  'translate'
+  'translate',
+  'handTool',
+  'lassoTool',
+  'spaceTool',
+  'globalConnect'
 ];
 
-PaletteProvider.prototype.getPaletteEntries = function(/*element*/) {
+PaletteProvider.prototype.getPaletteEntries = function (/*element*/) {
 
-  var actions  = {},
-      create = this._create,
-      elementFactory = this._elementFactory,
-      translate = this._translate
+  var actions = {},
+    create = this._create,
+    elementFactory = this._elementFactory,
+    translate = this._translate,
+    handTool = this._handTool,
+    lassoTool = this._lassoTool,
+    spaceTool = this._spaceTool,
+    globalConnect = this._globalConnect
 
+  function createAction (type, group, className, title, options) {
 
-  function createAction(type, group, className, title, options) {
-
-    function createListener(event) {
+    function createListener (event) {
       var shape = elementFactory.createShape(assign({ type: type }, options));
 
       if (options) {
@@ -55,6 +67,50 @@ PaletteProvider.prototype.getPaletteEntries = function(/*element*/) {
   }
 
   assign(actions, {
+    'hand-tool': {
+      group: 'tools',
+      className: 'bpmn-icon-hand-tool',
+      title: translate('Activate the hand tool'),
+      action: {
+        click: function (event) {
+          handTool.activateHand(event);
+        }
+      }
+    },
+    'lasso-tool': {
+      group: 'tools',
+      className: 'bpmn-icon-lasso-tool',
+      title: translate('Activate the lasso tool'),
+      action: {
+        click: function (event) {
+          lassoTool.activateSelection(event);
+        }
+      }
+    },
+    'space-tool': {
+      group: 'tools',
+      className: 'bpmn-icon-space-tool',
+      title: translate('Activate the create/remove space tool'),
+      action: {
+        click: function (event) {
+          spaceTool.activateSelection(event);
+        }
+      }
+    },
+    'global-connect-tool': {
+      group: 'tools',
+      className: 'bpmn-icon-connection-multi',
+      title: translate('Activate the global connect tool'),
+      action: {
+        click: function (event) {
+          globalConnect.toggle(event);
+        }
+      }
+    },
+    'tool-separator': {
+      group: 'tools',
+      separator: true
+    },
     'create.start-event': createAction(
       'bpmn:StartEvent', 'event', 'bpmn-icon-start-event-none'
     ),
