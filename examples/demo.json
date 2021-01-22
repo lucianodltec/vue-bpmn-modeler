@@ -5,7 +5,6 @@
   "xml": {
     "tagAlias": "lowerCase"
   },
-  "associations": [],
   "types": [
     {
       "name": "cat",
@@ -13,6 +12,5 @@
         "bpmn:Gateway"
       ]
     }
-  ],
-  "emumerations": []
+  ]
 }

@@ -29,9 +29,9 @@ export default {
       },
       moddleExtensions: { demo },
       translate: {
-        'Activate the hand tool': 'Mover',
-        'Activate the lasso tool': 'Selecionar',
-        'Activate the create/remove space tool': 'Espaçamento',
+        'Activate the hand tool': 'Mover (H)',
+        'Activate the lasso tool': 'Selecionar (L)',
+        'Activate the create/remove space tool': 'Espaçamento (S)',
         'Activate the global connect tool': 'Conexão',
         'Create StartEvent': 'Início',
         'Create EndEvent': 'Fim',
