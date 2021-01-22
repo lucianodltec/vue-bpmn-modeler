@@ -2,7 +2,7 @@
  * 自定义操作栏
  */
 export default class CustomContextPad {
-  constructor(config, contextPad, create, elementFactory, injector, translate) {
+  constructor (config, contextPad, create, elementFactory, injector, translate) {
     this.create = create
     this.elementFactory = elementFactory
     this.translate = translate
@@ -14,10 +14,10 @@ export default class CustomContextPad {
     contextPad.registerProvider(this)
   }
 
-  getContextPadEntries(element) {
+  getContextPadEntries (element) {
     const { autoPlace, create, elementFactory, translate } = this
 
-    function appendUserTask(event, element) {
+    function appendUserTask (event, element) {
       if (autoPlace) {
         const shape = elementFactory.createShape({ type: 'bpmn:UserTask' })
 
@@ -27,7 +27,7 @@ export default class CustomContextPad {
       }
     }
 
-    function appendUserTaskStart(event) {
+    function appendUserTaskStart (event) {
       const shape = elementFactory.createShape({ type: 'bpmn:UserTask' })
 
       create.start(event, shape, element)

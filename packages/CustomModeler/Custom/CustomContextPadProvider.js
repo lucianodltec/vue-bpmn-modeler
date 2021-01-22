@@ -15,7 +15,7 @@ CustomContextPadProvider.$inject = [
   'elementFactory'
 ]
 
-export default function CustomContextPadProvider(injector, connect, translate) {
+export default function CustomContextPadProvider (injector, connect, translate) {
   injector.invoke(ContextPadProvider, this)
 
   // var cached = bind(this.getContextPadEntries, this)
@@ -26,22 +26,22 @@ export default function CustomContextPadProvider(injector, connect, translate) {
   var modeling = this._modeling
   // var contextPad = this._contextPadt
 
-  this.getContextPadEntries = function(element) {
-    
+  this.getContextPadEntries = function (element) {
+
     var actions = {}
     var businessObject = element.businessObject
 
-    function startConnect(event, element, autoActivate) {
+    function startConnect (event, element, autoActivate) {
       connect.start(event, element, autoActivate)
     }
 
-    function appendAction(type, className, title, options) {
+    function appendAction (type, className, title, options) {
       if (typeof title !== 'string') {
         options = title
         title = translate('Append {type}', { type: type.replace(/^bpmn:/, '') })
       }
 
-      function appendStart(event, element) {
+      function appendStart (event, element) {
         var shape = elementFactory.createShape(assign({ type: type }, options))
         create.start(event, shape, {
           source: element
@@ -49,13 +49,13 @@ export default function CustomContextPadProvider(injector, connect, translate) {
       }
 
       var append = autoPlace
-        ? function(event, element) {
-            var shape = elementFactory.createShape(
-              assign({ type: type }, options)
-            )
+        ? function (event, element) {
+          var shape = elementFactory.createShape(
+            assign({ type: type }, options)
+          )
 
-            autoPlace.append(element, shape)
-          }
+          autoPlace.append(element, shape)
+        }
         : appendStart
 
       return {
@@ -69,7 +69,7 @@ export default function CustomContextPadProvider(injector, connect, translate) {
       }
     }
 
-    function removeElement() {
+    function removeElement () {
       modeling.removeElements([element])
     }
 
@@ -155,6 +155,7 @@ export default function CustomContextPadProvider(injector, connect, translate) {
         }
       }
     })
+    assign(actions, { 'append.text-annotation': appendAction('bpmn:TextAnnotation', 'bpmn-icon-text-annotation') })
     return actions
   }
 }
