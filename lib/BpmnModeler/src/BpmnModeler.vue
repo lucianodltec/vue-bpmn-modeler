@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import BpmnModeler from "../../CustomModeler.js";
+import BpmnModelerFactory from "../../CustomModelerFactory.js";
 import CustomTranslate from "../../CustomTranslate.js";
 import customRendererModule from "../../CustomRenderer.js";
 import minimapModule from "diagram-js-minimap";
@@ -16,6 +16,8 @@ export default {
   props: {
     diagramXML: String,
     moddleExtensions: { type: Object },
+    palette: { type: Object },
+    contextPad: { type: Object },
     translate: { type: Object }
   },
   data () {
@@ -42,7 +44,8 @@ export default {
     additionalModules.push(customRendererModule)
     additionalModules.push(minimapModule)
 
-    this.modeler = new BpmnModeler({
+    const factory = BpmnModelerFactory(this.palette, this.contextPad)
+    this.modeler = new factory({
       container: canvas,
       keyboard: {
         bindTo: window
@@ -53,6 +56,7 @@ export default {
       },
       moddleExtensions: this.moddleExtensions
     });
+
     await this.openDiagram(this.diagramXML).then(() => {
       // 自动保存当前模型设计
       let _self = this;
