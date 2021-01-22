@@ -6,6 +6,8 @@ import {
   assign
 } from 'min-dash';
 
+import paletteImage from '../../../resources/palette-image'
+
 export default function PaletteProvider (palette, create, elementFactory, translate, handTool, lassoTool, spaceTool, globalConnect) {
 
   this._create = create;
@@ -41,7 +43,7 @@ PaletteProvider.prototype.getPaletteEntries = function (/*element*/) {
     spaceTool = this._spaceTool,
     globalConnect = this._globalConnect
 
-  function createAction (type, group, className, title, options) {
+  function createAction (type, group, className, title, options, imageUrl) {
 
     function createListener (event) {
       var shape = elementFactory.createShape(assign({ type: type }, options));
@@ -56,8 +58,9 @@ PaletteProvider.prototype.getPaletteEntries = function (/*element*/) {
     var shortType = type.replace(/^bpmn:/, '');
 
     return {
-      group: group,
-      className: className,
+      group,
+      className,
+      imageUrl,
       title: translate(title || 'Create ' + shortType),
       action: {
         dragstart: createListener,
@@ -124,7 +127,7 @@ PaletteProvider.prototype.getPaletteEntries = function (/*element*/) {
       'bpmn:UserTask', 'task', 'bpmn-icon-user-task'
     ),
     'create.sendMessage': createAction(
-      'bpmn:sendMessage', 'task', 'bpmn-icon-send-task'
+      'zappost:sendMessage', 'task', '', '', null, paletteImage
     )
   });
 

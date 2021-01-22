@@ -7,13 +7,16 @@
 <script>
 import BpmnModeler from "../../CustomModeler";
 import CustomTranslate from "../../CustomTranslate";
+import customRendererModule from "../../CustomRenderer";
 import camundaModdleDescriptor from "camunda-bpmn-moddle/resources/camunda.json";
+import zappostModdleDescriptor from "./zappost.json";
 import minimapModule from "diagram-js-minimap";
 import { debounce } from "min-dash";
 
 let customTranslateModule = {
   translate: ["value", CustomTranslate]
 };
+
 export default {
   name: "BpmnModeler",
   props: {
@@ -34,21 +37,22 @@ export default {
   },
   async mounted () {
     let canvas = this.$refs["canvas"];
-    let additionalModules = [
-      customTranslateModule,
-      minimapModule
-    ]
     this.modeler = new BpmnModeler({
       container: canvas,
       keyboard: {
         bindTo: window
       },
-      additionalModules: additionalModules,
+      additionalModules: [
+        customTranslateModule,
+        customRendererModule,
+        minimapModule
+      ],
       cli: {
         bindTo: 'cli'
       },
       moddleExtensions: {
-        camunda: camundaModdleDescriptor
+        camunda: camundaModdleDescriptor,
+        zappost: zappostModdleDescriptor
       }
     });
     await this.openDiagram(this.diagramXML).then(() => {

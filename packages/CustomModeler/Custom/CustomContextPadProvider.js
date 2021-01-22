@@ -6,6 +6,8 @@ import { is } from 'bpmn-js/lib/util/ModelUtil'
 
 import { assign } from 'min-dash'
 
+import contextpadImage from '../../../resources/contextpad-image'
+
 inherits(CustomContextPadProvider, ContextPadProvider)
 
 CustomContextPadProvider.$inject = [
@@ -35,7 +37,7 @@ export default function CustomContextPadProvider (injector, connect, translate) 
       connect.start(event, element, autoActivate)
     }
 
-    function appendAction (type, className, title, options) {
+    function appendAction (type, className, title, options, imageUrl) {
       if (typeof title !== 'string') {
         options = title
         title = translate('Append {type}', { type: type.replace(/^bpmn:/, '') })
@@ -60,8 +62,9 @@ export default function CustomContextPadProvider (injector, connect, translate) 
 
       return {
         group: 'model',
-        className: className,
-        title: title,
+        className,
+        title,
+        imageUrl,
         action: {
           dragstart: appendStart,
           click: append
@@ -103,21 +106,22 @@ export default function CustomContextPadProvider (injector, connect, translate) 
           translate('Append UserTask')
         ),
         'append.sendMessage': appendAction(
-          'bpmn:sendMessage',
-          'bpmn-icon-send-task',
-          translate('Append sendMessage')
+          'zappost:sendMessage',
+          'bpmn-icon-service-task',
+          translate('Append sendMessage'),
+          null,
+          contextpadImage)
+      })
+    }
+    if (is(businessObject, 'bpmn:Gateway')) {
+      assign(actions, {
+        'append.user-task': appendAction(
+          'bpmn:UserTask',
+          'bpmn-icon-user-task',
+          translate('Append UserTask')
         )
       })
-    } else {
-      if (is(businessObject, 'bpmn:Gateway')) {
-        assign(actions, {
-          'append.user-task': appendAction(
-            'bpmn:UserTask',
-            'bpmn-icon-user-task',
-            translate('Append UserTask')
-          )
-        })
-      } else if (!is(businessObject, 'bpmn:EndEvent')) {
+      if (!is(businessObject, 'bpmn:EndEvent')) {
         assign(actions, {
           'append.end-event': appendAction(
             'bpmn:EndEvent',
@@ -150,6 +154,7 @@ export default function CustomContextPadProvider (injector, connect, translate) 
         }
       })
     }
+
     assign(actions, {
       delete: {
         group: 'edit',
@@ -160,7 +165,10 @@ export default function CustomContextPadProvider (injector, connect, translate) 
         }
       }
     })
-    assign(actions, { 'append.text-annotation': appendAction('bpmn:TextAnnotation', 'bpmn-icon-text-annotation') })
+
+    assign(actions, {
+      'append.text-annotation': appendAction('bpmn:TextAnnotation', 'bpmn-icon-text-annotation')
+    })
     return actions
   }
 }
