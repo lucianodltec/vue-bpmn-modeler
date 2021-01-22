@@ -146,6 +146,27 @@ export default {
             let modelerCanvas = this.modeler.get("canvas");
             let rootElement = modelerCanvas.getRootElement();
             let modeling = this.modeler.get("modeling");
+            let eventBus = this.modeler.get('eventBus');
+
+            // you may hook into any of the following events
+            var events = [
+              'element.hover',
+              'element.out',
+              'element.click',
+              'element.dblclick',
+              'element.mousedown',
+              'element.mouseup'
+            ];
+
+            events.forEach((event) => {
+              eventBus.on(event, (e) => {
+                // e.element = the model element
+                // e.gfx = the graphical element
+
+                this.$emit(event.replace(/element[.]/, ''), e.element);
+              });
+            });
+
             // modeling.updateProperties(rootElement, {
             //   // isExecutable: true
             // });

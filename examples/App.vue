@@ -1,6 +1,13 @@
 <template>
   <div id="app">
-    <BpmnModeler ref='modeler' v-model="modeler"/>
+    <BpmnModeler ref='modeler' v-model="modeler"
+                 @click="click"
+                 @hover="hover"
+                 @out="out"
+                 @dblclick="dblclick"
+                 @mousedown="mousedown"
+                 @mouseup="mouseup"
+    />
   </div>
 </template>
 <script>
@@ -17,6 +24,26 @@ export default {
   watch: {
     modeler (val) {
       console.log(val)
+    }
+  },
+  methods: {
+    click (element) {
+      console.log('click', element)
+    },
+    dblclick (element) {
+      console.log('dblclick', element)
+    },
+    mouseup (element) {
+      console.log('mouseup', element)
+    },
+    mousedown (element) {
+      console.log('mousedown', element)
+    },
+    hover (element) {
+      console.log('hover', element)
+    },
+    out (element) {
+      console.log('out', element)
     }
   }
 }
