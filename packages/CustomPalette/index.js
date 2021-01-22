@@ -6,7 +6,7 @@ import {
   assign
 } from 'min-dash';
 
-import paletteImage from '../../../resources/palette-image'
+import paletteImage from '../../resources/palette-image'
 
 export default function PaletteProvider (palette, create, elementFactory, translate, handTool, lassoTool, spaceTool, globalConnect) {
 

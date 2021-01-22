@@ -2,9 +2,19 @@ import Modeler from 'bpmn-js/lib/Modeler'
 
 import inherits from 'inherits'
 
-import CustomModule from './Custom'
+import CustomPalette from '../CustomPalette';
+import CustomContextPadProvider from '../CustomContextPadProvider';
 
-export default function CustomModeler(options) {
+const CustomModule = {
+  __init__: [
+    'paletteProvider',
+    'contextPadProvider'
+  ],
+  paletteProvider: ['type', CustomPalette],
+  contextPadProvider: ['type', CustomContextPadProvider]
+}
+
+export default function CustomModeler (options) {
   Modeler.call(this, options)
 
   this._customElements = []
