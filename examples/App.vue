@@ -4,6 +4,7 @@
                  v-model="modeler"
                  :moddleExtensions="moddleExtensions"
                  :translate="translate"
+                 :palette="palette"
                  @click="click"
                  @hover="hover"
                  @out="out"
@@ -16,6 +17,7 @@
 <script>
 
 import demo from './demo.json'
+import catImage from './cat-image'
 
 export default {
   data () {
@@ -34,6 +36,17 @@ export default {
         'Remove': 'Remover',
         'Append Sequence': 'Sequência',
         'Append EndEvent': 'Fim'
+      },
+      palette: {
+        'create.gateway': {
+          type: 'bpmn:gateway',
+          className: 'bpmn-icon-gateway-none'
+        },
+        'create.demoCat': {
+          type: 'demo:cat',
+          group: 'demo',
+          imageUrl: catImage
+        }
       },
       modeler: {
         xmlData: "",
