@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <BpmnModeler ref='modeler' v-model="modeler"
+    <BpmnModeler ref='modeler'
+                 v-model="modeler"
+                 :moddleExtensions="moddleExtensions"
+                 :translate="translate"
                  @click="click"
                  @hover="hover"
                  @out="out"
@@ -12,9 +15,26 @@
 </template>
 <script>
 
+import demo from './demo.json'
+
 export default {
   data () {
     return {
+      moddleExtensions: { demo },
+      translate: {
+        'Activate the hand tool': 'Mover',
+        'Activate the lasso tool': 'Selecionar',
+        'Activate the create/remove space tool': 'Espaçamento',
+        'Activate the global connect tool': 'Conexão',
+        'Create StartEvent': 'Início',
+        'Create EndEvent': 'Fim',
+        'Create Gateway': 'Decisão',
+        'Open minimap': 'MAPA',
+        'Close minimap': 'FECHAR',
+        'Remove': 'Remover',
+        'Append Sequence': 'Sequência',
+        'Append EndEvent': 'Fim'
+      },
       modeler: {
         xmlData: "",
         svgImage: ""

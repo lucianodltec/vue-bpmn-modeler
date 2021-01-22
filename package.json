@@ -12,7 +12,6 @@
   "main": "lib/vue-bpmn-modeler.umd.min.js",
   "dependencies": {
     "bpmn-js": "^8.1.0",
-    "camunda-bpmn-moddle": "^4.5.0",
     "core-js": "^3.6.5",
     "diagram-js-minimap": "^2.0.4",
     "inherits": "^2.0.4",

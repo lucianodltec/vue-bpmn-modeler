@@ -1,14 +1,14 @@
 {
-  "name": "Zappost",
-  "uri": "http://zappost.org/schema/1.0/bpmn",
-  "prefix": "zappost",
+  "name": "Demo",
+  "uri": "http://demo.org/schema/1.0/bpmn",
+  "prefix": "demo",
   "xml": {
     "tagAlias": "lowerCase"
   },
   "associations": [],
   "types": [
     {
-      "name": "sendMessage",
+      "name": "cat",
       "superClass": [
         "bpmn:Gateway"
       ]

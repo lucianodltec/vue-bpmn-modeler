@@ -8,19 +8,15 @@
 import BpmnModeler from "../../CustomModeler.js";
 import CustomTranslate from "../../CustomTranslate.js";
 import customRendererModule from "../../CustomRenderer.js";
-import camundaModdleDescriptor from "camunda-bpmn-moddle/resources/camunda.json";
-import zappostModdleDescriptor from "./zappost.json";
 import minimapModule from "diagram-js-minimap";
 import { debounce } from "min-dash";
-
-let customTranslateModule = {
-  translate: ["value", CustomTranslate]
-};
 
 export default {
   name: "BpmnModeler",
   props: {
-    diagramXML: String
+    diagramXML: String,
+    moddleExtensions: { type: Object },
+    translate: { type: Object }
   },
   data () {
     return {
@@ -37,23 +33,25 @@ export default {
   },
   async mounted () {
     let canvas = this.$refs["canvas"];
+    const additionalModules = []
+    if (this.translate) {
+      additionalModules.push({
+        translate: ["value", CustomTranslate(this.translate)]
+      })
+    }
+    additionalModules.push(customRendererModule)
+    additionalModules.push(minimapModule)
+
     this.modeler = new BpmnModeler({
       container: canvas,
       keyboard: {
         bindTo: window
       },
-      additionalModules: [
-        customTranslateModule,
-        customRendererModule,
-        minimapModule
-      ],
+      additionalModules,
       cli: {
         bindTo: 'cli'
       },
-      moddleExtensions: {
-        camunda: camundaModdleDescriptor,
-        zappost: zappostModdleDescriptor
-      }
+      moddleExtensions: this.moddleExtensions
     });
     await this.openDiagram(this.diagramXML).then(() => {
       // 自动保存当前模型设计
@@ -82,61 +80,12 @@ export default {
     });
   },
   methods: {
-    async replace (data) {
-      let _self = this;
-      await this.openDiagram(this.diagramXML);
-      let incomingTask = []
-      let outgoingTask = []
-      return new Promise((resolve) => {
-        if (data && data.taskList.length > 0) {
-          let modelerCanvas = _self.modeler.get("canvas");
-          let rootElement = modelerCanvas.getRootElement();
-          let cli = window.cli;
-          let activityType = ''
-          // 删除目标task sequenceFlow
-          rootElement.children.forEach(n => {
-            if (n.id === data.replaceActivity) {
-              if (n.type === 'bpmn:SequenceFlow') {
-                incomingTask.push(n.source.id)
-                outgoingTask.push(n.target.id)
-              } else {
-                n.incoming.forEach(nn => {
-                  incomingTask.push(nn.source.id)
-                })
-                n.outgoing.forEach(nn => {
-                  outgoingTask.push(nn.target.id)
-                })
-              }
-              activityType = n.type
-            }
-          })
-          let taskActivity = activityType === 'bpmn:SequenceFlow' ? incomingTask[0] : data.replaceActivity
-          for (let index = 0; index < data.taskList.length; index++) {
-            taskActivity = cli.append(taskActivity, 'bpmn:UserTask')
-            data.taskList[index].taskActivity = taskActivity;
-            cli.setLabel(taskActivity, data.taskList[index].label);
-            cli.move(taskActivity, { x: -200, y: 120 });
-          }
-          activityType === 'bpmn:SequenceFlow' ? cli.removeConnection(data.replaceActivity) : cli.removeShape(data.replaceActivity)
-          incomingTask.forEach(n => {
-            cli.connect(n, data.taskList[0].taskActivity, 'bpmn:SequenceFlow')
-          })
-          outgoingTask.forEach(n => {
-            cli.connect(data.taskList[data.taskList.length - 1].taskActivity, n, 'bpmn:SequenceFlow')
-          })
-          resolve(data.taskList);
-        } else {
-          this.openDiagram(this.diagramXML);
-        }
-      })
-    },
     openDiagram (xml) {
       return new Promise(async (resolve, reject) => {
         if (xml) {
           try {
             const result = await this.modeler.importXML(xml);
-            console.log('rendered');
-            resolve()
+            resolve(result)
           } catch (err) {
             reject(err);
           }
@@ -176,21 +125,6 @@ export default {
           });
         }
       })
-    },
-    saveSVG (done) {
-      this.modeler.saveSVG(done);
-    },
-    // todo
-    focusOut (event) {
-      let layerBase = document.querySelector('.layer-base')
-      let zoom = layerBase.parentNode.getBoundingClientRect();
-      if (event.pageX < zoom.left || event.pageX > (zoom.left + zoom.width + 100) || event.pageY < zoom.top || event.pageY > (zoom.top + zoom.height + 40)) {
-        // 鼠标移出编辑区域 完成输入 并 失去焦点
-        let directEditing = this.modeler.injector.get('directEditing', false);
-        directEditing.complete()
-        let eventBus = this.modeler.injector.get('eventBus', false);
-        eventBus.fire('element.click', '')
-      }
     }
   }
 };
