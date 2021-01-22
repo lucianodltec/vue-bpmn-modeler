@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import BpmnModeler from "../../CustomModeler";
-import CustomTranslate from "../../CustomTranslate";
-import customRendererModule from "../../CustomRenderer";
+import BpmnModeler from "../../CustomModeler.js";
+import CustomTranslate from "../../CustomTranslate.js";
+import customRendererModule from "../../CustomRenderer.js";
 import camundaModdleDescriptor from "camunda-bpmn-moddle/resources/camunda.json";
 import zappostModdleDescriptor from "./zappost.json";
 import minimapModule from "diagram-js-minimap";

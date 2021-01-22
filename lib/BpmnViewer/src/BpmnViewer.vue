@@ -7,6 +7,7 @@
 
 <script>
 import BpmnViewer from 'bpmn-js/lib/NavigatedViewer';
+
 export default {
   name: "BpmnViewer",
   props: {
@@ -19,18 +20,18 @@ export default {
       default: () => []
     }
   },
-  data() {
+  data () {
     return {
       taskList: []
     };
   },
-  async mounted() {
+  async mounted () {
     this.taskList = this.taskData
     let bpmnViewer = new BpmnViewer({
       container: this.$refs["canvas"],
       bpmnRenderer: {
-          // defaultFillColor: "rgba(30,30,30,1)",
-          // defaultStrokeColor: "red"
+        // defaultFillColor: "rgba(30,30,30,1)",
+        // defaultStrokeColor: "red"
       }
     });
     // bpmnViewer.on('import.parse.start', (re) => {
@@ -90,31 +91,31 @@ export default {
         // console.log('bpmnViewer', bpmnViewer1)
         bpmnViewer.getDefinitions().rootElements[0].flowElements.forEach(n => {
           if (n.$type === 'bpmn:UserTask') {
-              let completeTask = this.taskList.find(m => m.key === n.id)
-              let todoTask = this.taskList.find(m => !m.completed)
-              let endTask = this.taskList[this.taskList.length - 1]
-              if (completeTask) {
-                canvas.addMarker(n.id, completeTask.completed ? 'highlight' : 'highlight-todo');  
-                n.outgoing.forEach(nn => {
-                  let targetTask = this.taskList.find(m => m.key === nn.targetRef.id)
-                  if (targetTask) {
-                    canvas.addMarker(nn.id, targetTask.completed ? 'highlight' : 'highlight-todo');  
-                  } else if (nn.targetRef.$type === 'bpmn:ExclusiveGateway') {
-                    // canvas.addMarker(nn.id, 'highlight');
-                    canvas.addMarker(nn.id, completeTask.completed ? 'highlight' : 'highlight-todo');  
-                    canvas.addMarker(nn.targetRef.id, completeTask.completed ? 'highlight' : 'highlight-todo');  
-                  } else if (nn.targetRef.$type === 'bpmn:EndEvent') {
-                    if (!todoTask && endTask.key === n.id) {
-                      canvas.addMarker(nn.id, 'highlight');  
-                      canvas.addMarker(nn.targetRef.id, 'highlight');  
-                    }
-                    if (!completeTask.completed) {
-                      canvas.addMarker(nn.id, 'highlight-todo');  
-                      canvas.addMarker(nn.targetRef.id, 'highlight-todo');  
-                    }
+            let completeTask = this.taskList.find(m => m.key === n.id)
+            let todoTask = this.taskList.find(m => !m.completed)
+            let endTask = this.taskList[this.taskList.length - 1]
+            if (completeTask) {
+              canvas.addMarker(n.id, completeTask.completed ? 'highlight' : 'highlight-todo');
+              n.outgoing.forEach(nn => {
+                let targetTask = this.taskList.find(m => m.key === nn.targetRef.id)
+                if (targetTask) {
+                  canvas.addMarker(nn.id, targetTask.completed ? 'highlight' : 'highlight-todo');
+                } else if (nn.targetRef.$type === 'bpmn:ExclusiveGateway') {
+                  // canvas.addMarker(nn.id, 'highlight');
+                  canvas.addMarker(nn.id, completeTask.completed ? 'highlight' : 'highlight-todo');
+                  canvas.addMarker(nn.targetRef.id, completeTask.completed ? 'highlight' : 'highlight-todo');
+                } else if (nn.targetRef.$type === 'bpmn:EndEvent') {
+                  if (!todoTask && endTask.key === n.id) {
+                    canvas.addMarker(nn.id, 'highlight');
+                    canvas.addMarker(nn.targetRef.id, 'highlight');
                   }
-                });
-              }
+                  if (!completeTask.completed) {
+                    canvas.addMarker(nn.id, 'highlight-todo');
+                    canvas.addMarker(nn.targetRef.id, 'highlight-todo');
+                  }
+                }
+              });
+            }
           } else if (n.$type === 'bpmn:ExclusiveGateway') {
             n.outgoing.forEach(nn => {
               let targetTask = this.taskList.find(m => m.key === nn.targetRef.id)
@@ -139,52 +140,59 @@ export default {
       console.log('error rendering', err);
     }
   },
-  methods: {
-  }
+  methods: {}
 };
 </script>
 <style lang="less" scoped>
 .containers {
   position: absolute;
   background-color: #ffffff;
-  top:0;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
+
 .canvas {
   width: 100%;
   height: 100%;
 }
-/deep/.highlight.djs-shape .djs-visual > :nth-child(1) {
-  fill: green !important; 
+
+/deep/ .highlight.djs-shape .djs-visual > :nth-child(1) {
+  fill: green !important;
   stroke: green !important;
   fill-opacity: 0.2 !important;
 }
-/deep/.highlight.djs-shape .djs-visual > :nth-child(2) {
+
+/deep/ .highlight.djs-shape .djs-visual > :nth-child(2) {
   fill: green !important;
 }
-/deep/.highlight.djs-shape .djs-visual > path {
+
+/deep/ .highlight.djs-shape .djs-visual > path {
   fill: green !important;
   fill-opacity: 0.2 !important;
   stroke: green !important;
 }
-/deep/.highlight.djs-connection > .djs-visual > path {
+
+/deep/ .highlight.djs-connection > .djs-visual > path {
   stroke: green !important;
 }
-/deep/.highlight-todo.djs-connection > .djs-visual > path {
+
+/deep/ .highlight-todo.djs-connection > .djs-visual > path {
   stroke: orange !important;
   stroke-dasharray: 4px !important;
   fill-opacity: 0.2 !important;
   marker-end: url(#sequenceflow-end-_E7DFDF-_E7DFDF-803g1kf6zwzmcig1y2ulm5egr);
 }
-/deep/.highlight-todo.djs-shape .djs-visual > :nth-child(1) {
-  fill: orange !important; 
+
+/deep/ .highlight-todo.djs-shape .djs-visual > :nth-child(1) {
+  fill: orange !important;
   stroke: orange !important;
-  stroke-dasharray: 4px !important; 
+  stroke-dasharray: 4px !important;
   fill-opacity: 0.2 !important;
 }
-/deep/.overlays-div {
+
+/deep/ .overlays-div {
   font-size: 10px;
   color: red;
   width: 100px;
