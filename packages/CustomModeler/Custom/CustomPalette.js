@@ -117,11 +117,14 @@ PaletteProvider.prototype.getPaletteEntries = function (/*element*/) {
     'create.end-event': createAction(
       'bpmn:EndEvent', 'event', 'bpmn-icon-end-event-none'
     ),
-    'create.exclusive-gateway': createAction(
-      'bpmn:ExclusiveGateway', 'gateway', 'bpmn-icon-gateway-xor'
+    'create.gateway': createAction(
+      'bpmn:Gateway', 'gateway', 'bpmn-icon-gateway-none'
     ),
     'create.user-task': createAction(
       'bpmn:UserTask', 'task', 'bpmn-icon-user-task'
+    ),
+    'create.sendMessage': createAction(
+      'bpmn:sendMessage', 'task', 'bpmn-icon-send-task'
     )
   });
 

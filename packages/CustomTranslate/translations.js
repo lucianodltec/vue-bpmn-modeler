@@ -5,10 +5,15 @@
  * translations and labels to translate.
  */
 export default {
+  'Activate the hand tool': 'Mover',
+  'Activate the lasso tool': 'Selecionar',
+  'Activate the create/remove space tool': 'Espaçamento',
+  'Activate the global connect tool': 'Conexão',
   'Create EndEvent': 'Fim',
   'Create StartEvent': 'Início',
-  'Create ExclusiveGateway': 'Decisão',
+  'Create Gateway': 'Decisão',
   'Create UserTask': 'Etapa',
+  'Create sendMessage': 'Enviar mensagem',
   'Open minimap': 'MAPA',
   'Close minimap': 'FECHAR',
   'Append UserTask': 'Etapa',

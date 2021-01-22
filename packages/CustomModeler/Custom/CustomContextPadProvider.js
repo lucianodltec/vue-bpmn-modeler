@@ -93,7 +93,7 @@ export default function CustomContextPadProvider (injector, connect, translate) 
     if (is(businessObject, 'bpmn:StartEvent')) {
       assign(actions, {
         'append.gateway': appendAction(
-          'bpmn:ExclusiveGateway',
+          'bpmn:Gateway',
           'bpmn-icon-gateway-none',
           translate('Append Gateway')
         ),
@@ -101,10 +101,15 @@ export default function CustomContextPadProvider (injector, connect, translate) 
           'bpmn:UserTask',
           'bpmn-icon-user-task',
           translate('Append UserTask')
+        ),
+        'append.sendMessage': appendAction(
+          'bpmn:sendMessage',
+          'bpmn-icon-send-task',
+          translate('Append sendMessage')
         )
       })
     } else {
-      if (is(businessObject, 'bpmn:ExclusiveGateway')) {
+      if (is(businessObject, 'bpmn:Gateway')) {
         assign(actions, {
           'append.user-task': appendAction(
             'bpmn:UserTask',
@@ -120,7 +125,7 @@ export default function CustomContextPadProvider (injector, connect, translate) 
             translate('Append EndEvent')
           ),
           'append.gateway': appendAction(
-            'bpmn:ExclusiveGateway',
+            'bpmn:Gateway',
             'bpmn-icon-gateway-none',
             translate('Append Gateway')
           ),

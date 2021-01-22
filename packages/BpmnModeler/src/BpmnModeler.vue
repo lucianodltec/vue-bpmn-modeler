@@ -9,7 +9,6 @@ import BpmnModeler from "../../CustomModeler";
 import CustomTranslate from "../../CustomTranslate";
 import camundaModdleDescriptor from "camunda-bpmn-moddle/resources/camunda.json";
 import minimapModule from "diagram-js-minimap";
-import CliModule from 'bpmn-js-cli';
 import { debounce } from "min-dash";
 
 let customTranslateModule = {
@@ -37,8 +36,7 @@ export default {
     let canvas = this.$refs["canvas"];
     let additionalModules = [
       customTranslateModule,
-      minimapModule,
-      CliModule
+      minimapModule
     ]
     this.modeler = new BpmnModeler({
       container: canvas,
