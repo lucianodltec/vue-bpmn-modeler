@@ -44,7 +44,7 @@ export default {
       },
       palette: {
         'create.gateway': {
-          type: 'bpmn:gateway',
+          type: 'bpmn:Gateway',
           className: 'bpmn-icon-gateway-none'
         },
         'create.demoCat': {
@@ -54,15 +54,23 @@ export default {
         }
       },
       contextPad (element) {
-        if (element.$type === 'bpmn:StartEvent') {
-          return {
-            'append.demoCat': {
-              type: 'demo:cat',
-              title: 'Append demoCat',
-              imageUrl: catImage
-            }
+        const res = {}
+
+        if (element.$type !== 'bpmn:EndEvent') {
+          res['append.gateway'] = {
+            type: 'bpmn:Gateway',
+            className: 'bpmn-icon-gateway-none',
+            title: 'Append Gateway'
+          }
+          res['append.demoCat'] = {
+            type: 'demo:cat',
+            title: 'Append demoCat',
+            className: 'bpmn-icon-sub-process-marker'
+            // imageUrl: catImage
           }
         }
+
+        return res
       }
     }
   },
