@@ -6,7 +6,7 @@
 
 <script>
 import BpmnModelerFactory from "../../CustomModelerFactory.js";
-import CustomTranslate from "../../CustomTranslate.js";
+import CustomTranslateFactory from "../../CustomTranslateFactory.js";
 import customRendererModule from "../../CustomRenderer.js";
 import minimapModule from "diagram-js-minimap";
 import { debounce } from "min-dash";
@@ -38,7 +38,7 @@ export default {
     const additionalModules = []
     if (this.translate) {
       additionalModules.push({
-        translate: ["value", CustomTranslate(this.translate)]
+        translate: ["value", CustomTranslateFactory(this.translate)]
       })
     }
     additionalModules.push(customRendererModule)
