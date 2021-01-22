@@ -36,19 +36,22 @@ export default {
         'Create StartEvent': 'Início',
         'Create EndEvent': 'Fim',
         'Create Gateway': 'Decisão',
+        'Append Gateway': 'Decisão',
+        'Create Cat': 'Gato!',
+        'Append Cat': 'Gato!',
         'Open minimap': 'MAPA',
         'Close minimap': 'FECHAR',
         'Remove': 'Remover',
-        'Append Sequence': 'Sequência',
+        'Append Sequence': 'Transição',
         'Append EndEvent': 'Fim'
       },
       palette: {
-        'create.gateway': {
+        'create.Gateway': {
           type: 'bpmn:Gateway',
           className: 'bpmn-icon-gateway-none'
         },
-        'create.demoCat': {
-          type: 'demo:cat',
+        'create.Cat': {
+          type: 'demo:Cat',
           group: 'demo',
           imageUrl: catImage
         }
@@ -62,9 +65,9 @@ export default {
             className: 'bpmn-icon-gateway-none',
             title: 'Append Gateway'
           }
-          res['append.demoCat'] = {
+          res['append.cat'] = {
             type: 'demo:cat',
-            title: 'Append demoCat',
+            title: 'Append Cat',
             className: 'bpmn-icon-sub-process-marker'
             // imageUrl: catImage
           }

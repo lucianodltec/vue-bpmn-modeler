@@ -7,7 +7,7 @@
   },
   "types": [
     {
-      "name": "cat",
+      "name": "Cat",
       "superClass": [
         "bpmn:Gateway"
       ]
