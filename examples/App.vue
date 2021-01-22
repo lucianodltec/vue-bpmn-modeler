@@ -36,20 +36,16 @@ export default {
         'Create StartEvent': 'Início',
         'Create EndEvent': 'Fim',
         'Create Gateway': 'Decisão',
-        'Append Gateway': 'Decisão',
         'Create Cat': 'Gato!',
+        'Append Sequence': 'Transição',
+        'Append Gateway': 'Decisão',
+        'Append EndEvent': 'Fim',
         'Append Cat': 'Gato!',
         'Open minimap': 'MAPA',
         'Close minimap': 'FECHAR',
-        'Remove': 'Remover',
-        'Append Sequence': 'Transição',
-        'Append EndEvent': 'Fim'
+        'Remove': 'Remover'
       },
       palette: {
-        'create.Gateway': {
-          type: 'bpmn:Gateway',
-          className: 'bpmn-icon-gateway-none'
-        },
         'create.Cat': {
           type: 'demo:Cat',
           group: 'demo',
