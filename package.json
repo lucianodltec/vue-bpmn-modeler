@@ -1,13 +1,13 @@
 {
   "name": "@lucianodltec/vue-bpmn-modeler",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "private": false,
   "author": "evanyangg",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name vue-bpmn-modeler --dest lib packages/index.js"
+    "lib": "vue-cli-service build --target lib --name vue-bpmn-modeler --dest lib lib/index.js"
   },
   "main": "lib/vue-bpmn-modeler.umd.min.js",
   "dependencies": {
