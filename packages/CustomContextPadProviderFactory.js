@@ -26,7 +26,8 @@ export default function (configFn) {
         let { type, className, title, options, imageUrl } = params
         if (typeof title !== 'string') {
           options = title
-          title = translate('Append {type}', { type: type.replace(/^bpmn:/, '') })
+          const [p1, p2] = type.split(':')
+          title = translate(`Append ${ p2 || p1 }`)
         }
 
         function appendStart (event, element) {

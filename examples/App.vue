@@ -89,19 +89,19 @@ export default {
       console.log('click', element)
     },
     dblclick (element) {
-      console.log('dblclick', element)
+      // console.log('dblclick', element)
     },
     mouseup (element) {
-      console.log('mouseup', element)
+      // console.log('mouseup', element)
     },
     mousedown (element) {
-      console.log('mousedown', element)
+      // console.log('mousedown', element)
     },
     hover (element) {
-      console.log('hover', element)
+      // console.log('hover', element)
     },
     out (element) {
-      console.log('out', element)
+      // console.log('out', element)
     }
   }
 }
