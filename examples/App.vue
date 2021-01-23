@@ -39,23 +39,23 @@ export default {
         'Create StartEvent': 'Início',
         'Create EndEvent': 'Fim',
         'Create Gateway': 'Decisão',
-        'Create Cat': 'Gato!',
+        'Create Chat': 'Chat',
         'Append Sequence': 'Transição',
         'Append Gateway': 'Decisão',
         'Append EndEvent': 'Fim',
-        'Append Cat': 'Gato!',
+        'Append Chat': 'Chat',
         'Open minimap': 'MAPA',
         'Close minimap': 'FECHAR',
         'Remove': 'Remover'
       },
       renderer: {
-        'demo:Cat': {
+        'demo:Chat': {
           imageUrl: elementImage
         }
       },
       palette: {
         'create.Cat': {
-          type: 'demo:Cat',
+          type: 'demo:Chat',
           group: 'demo',
           imageUrl: paletteImage
         }
@@ -64,14 +64,14 @@ export default {
         const res = {}
 
         if (element.$type !== 'bpmn:EndEvent') {
-          res['append.gateway'] = {
+          res['append.Gateway'] = {
             type: 'bpmn:Gateway',
             className: 'bpmn-icon-gateway-none',
             title: 'Append Gateway'
           }
-          res['append.cat'] = {
-            type: 'demo:Cat',
-            title: 'Append Cat',
+          res['append.Chat'] = {
+            type: 'demo:Chat',
+            title: 'Append Chat',
             imageUrl: contextpadImage
           }
         }
