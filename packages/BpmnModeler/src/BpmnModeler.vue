@@ -1,6 +1,9 @@
 <template>
-  <div ref="container" class="containers">
-    <div ref="canvas" class="canvas"></div>
+  <div ref="container" style="position: absolute;
+       background-color: #ffffff;
+       top: 0; left: 0;
+       width: 100%; height: 100%;">
+    <div ref="canvas" style="width: 100%; height: 100%;"/>
   </div>
 </template>
 
@@ -136,30 +139,8 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-// @import "../../styles/app.less";
+//@import "../../styles/app.less";
 @import "~bpmn-js/dist/assets/diagram-js.css";
 @import "~bpmn-js/dist/assets/bpmn-font/css/bpmn.css";
 @import "~diagram-js-minimap/assets/diagram-js-minimap.css";
-
-.containers {
-  position: absolute;
-  background-color: #ffffff;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  // position: relative;
-  // width: 100%;
-  // height: 100%;
-}
-
-.canvas {
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-  // right: 0;
-  // bottom: 0;
-  width: 100%;
-  height: 100%;
-}
 </style>
