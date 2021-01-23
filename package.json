@@ -9,7 +9,7 @@
     "lint": "vue-cli-service lint",
     "lib": "vue-cli-service build --target lib --name vue-bpmn-modeler --dest lib packages/index.js"
   },
-  "main": "dist/js",
+  "main": "lib/vue-bpmn-modeler.umd.min.js",
   "dependencies": {
     "bpmn-js": "^8.1.0",
     "core-js": "^3.6.5",
