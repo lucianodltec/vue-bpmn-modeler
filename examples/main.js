@@ -1,6 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
-import BpmnModeler from '../lib/BpmnModeler'
+import BpmnModeler from '../packages/BpmnModeler'
 
 Vue.config.productionTip = true;
 Vue.component(BpmnModeler.name, BpmnModeler)
