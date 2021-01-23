@@ -1,4 +1,4 @@
-export default function (translations) {
+export default function (translations = {}) {
   return function customTranslate (template, replacements) {
     replacements = replacements || {};
 

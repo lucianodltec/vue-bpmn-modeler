@@ -3,7 +3,7 @@ import ContextPadProvider from 'bpmn-js/lib/features/context-pad/ContextPadProvi
 import { is } from 'bpmn-js/lib/util/ModelUtil'
 import { assign } from 'min-dash'
 
-export default function (config) {
+export default function (configFn) {
 
   function CustomContextPadProvider (injector, connect, translate) {
     injector.invoke(ContextPadProvider, this)
@@ -62,8 +62,8 @@ export default function (config) {
         modeling.removeElements([element])
       }
 
-      if (typeof config === 'function') {
-        const res = config(businessObject) || {}
+      if (typeof configFn === 'function') {
+        const res = configFn(businessObject) || {}
         Object.keys(res).forEach(key => {
           const items = {}
           items[key] = appendAction(res[key])

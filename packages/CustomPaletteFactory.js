@@ -1,6 +1,6 @@
 import { assign } from 'min-dash';
 
-export default function (config) {
+export default function (config = {}) {
 
   function PaletteProvider (palette, create, elementFactory, translate, handTool, lassoTool, spaceTool, globalConnect) {
 

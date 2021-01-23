@@ -3,7 +3,7 @@ import inherits from 'inherits'
 import CustomPaletteFactory from './CustomPaletteFactory.js';
 import CustomContextPadProviderFactory from './CustomContextPadProviderFactory.js';
 
-export default function (palette, contextPad) {
+export default function (palette = {}, contextPad) {
   function CustomModelerFactory (options) {
     Modeler.call(this, options)
 
