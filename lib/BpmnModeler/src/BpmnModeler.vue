@@ -7,7 +7,7 @@
 <script>
 import BpmnModelerFactory from "../../CustomModelerFactory.js";
 import CustomTranslateFactory from "../../CustomTranslateFactory.js";
-import customRendererModule from "../../CustomRenderer.js";
+import CustomRendererModuleFactory from "../../CustomRendererFactory.js";
 import minimapModule from "diagram-js-minimap";
 import { debounce } from "min-dash";
 
@@ -16,6 +16,7 @@ export default {
   props: {
     diagramXML: String,
     moddleExtensions: { type: Object },
+    renderer: { type: Object },
     palette: { type: Object },
     contextPad: { type: Function },
     translate: { type: Object }
@@ -41,7 +42,8 @@ export default {
         translate: ["value", CustomTranslateFactory(this.translate)]
       })
     }
-    additionalModules.push(customRendererModule)
+    const CustomRendererModule = CustomRendererModuleFactory(this.renderer)
+    additionalModules.push(CustomRendererModule)
     additionalModules.push(minimapModule)
 
     const factory = BpmnModelerFactory(this.palette, this.contextPad)

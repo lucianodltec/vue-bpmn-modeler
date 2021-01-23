@@ -3,6 +3,7 @@
     <BpmnModeler ref='modeler'
                  v-model="modeler"
                  :moddleExtensions="moddleExtensions"
+                 :renderer="renderer"
                  :translate="translate"
                  :palette="palette"
                  :context-pad="contextPad"
@@ -18,7 +19,9 @@
 <script>
 
 import demo from './demo.json'
-import catImage from './cat-image'
+import contextpadImage from './img16x16-contextpad'
+import paletteImage from './img32x32-palette'
+import elementImage from './img100x100-element'
 
 export default {
   data () {
@@ -45,11 +48,16 @@ export default {
         'Close minimap': 'FECHAR',
         'Remove': 'Remover'
       },
+      renderer: {
+        'demo:Cat': {
+          imageUrl: elementImage
+        }
+      },
       palette: {
         'create.Cat': {
           type: 'demo:Cat',
           group: 'demo',
-          imageUrl: catImage
+          imageUrl: paletteImage
         }
       },
       contextPad (element) {
@@ -62,10 +70,9 @@ export default {
             title: 'Append Gateway'
           }
           res['append.cat'] = {
-            type: 'demo:cat',
+            type: 'demo:Cat',
             title: 'Append Cat',
-            className: 'bpmn-icon-sub-process-marker'
-            // imageUrl: catImage
+            imageUrl: contextpadImage
           }
         }
 
