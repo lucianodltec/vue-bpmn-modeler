@@ -53,7 +53,7 @@ export default {
         }
       },
       palette: {
-        'create.Cat': {
+        'create.Chat': {
           type: 'demo:Chat',
           group: 'demo',
           imageUrl: paletteImage

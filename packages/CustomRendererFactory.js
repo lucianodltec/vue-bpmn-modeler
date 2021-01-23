@@ -12,7 +12,7 @@ export default function (config = {}) {
     BaseRenderer.call(this, eventBus, 1500);
 
     this.canRender = function (element) {
-      return is(element, Object.keys(config));
+      return Object.keys(config).some(i => is(element, i))
     };
 
     this.drawShape = function (parent, shape) {
