@@ -14,7 +14,7 @@ import { debounce } from "min-dash";
 export default {
   name: "BpmnModeler",
   props: {
-    value: String,
+    value: { type: Object, required: true },
     moddleExtensions: { type: Object },
     renderer: { type: Object },
     palette: { type: Object },
