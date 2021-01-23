@@ -12,8 +12,7 @@
                  @out="out"
                  @dblclick="dblclick"
                  @mousedown="mousedown"
-                 @mouseup="mouseup"
-    />
+                 @mouseup="mouseup"/>
   </div>
 </template>
 <script>
