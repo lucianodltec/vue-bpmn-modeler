@@ -14,7 +14,7 @@ import { debounce } from "min-dash";
 export default {
   name: "BpmnModeler",
   props: {
-    diagramXML: String,
+    value: String,
     moddleExtensions: { type: Object },
     renderer: { type: Object },
     palette: { type: Object },
@@ -30,8 +30,8 @@ export default {
     };
   },
   watch: {
-    diagramXML (val) {
-      this.openDiagram(val)
+    value (val) {
+      this.openDiagram(val.xmlData)
     }
   },
   async mounted () {
@@ -59,7 +59,7 @@ export default {
       moddleExtensions: this.moddleExtensions
     });
 
-    await this.openDiagram(this.diagramXML).then(() => {
+    await this.openDiagram(this.value.xmlData).then(() => {
       // 自动保存当前模型设计
       let _self = this;
       let exportArtifacts = debounce(async () => {
