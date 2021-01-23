@@ -18,7 +18,6 @@ export default function (config = {}) {
     this.drawShape = function (parent, shape) {
       const info = config[shape.type]
       if (info) {
-        console.log('drawShape', info)
         const width = info.width || shape.width
         const height = info.height || shape.height
         var gfx = svgCreate('image', {
