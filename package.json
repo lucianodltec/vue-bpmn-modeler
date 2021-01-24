@@ -61,7 +61,6 @@
   ],
   "homepage": "https://github.com/evanyangg/vue-bpmn-modeler",
   "keyword": [
-    "camunda",
     "flowable",
     "activity",
     "bpmn.js"
