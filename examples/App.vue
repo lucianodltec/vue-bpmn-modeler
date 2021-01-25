@@ -40,7 +40,7 @@ export default {
         'Append EndEvent': 'Fim',
         'Append Chat': 'Chat',
         'Open minimap': ' ',
-        'Close minimap': 'X',
+        'Close minimap': ' ',
         'Remove': 'Remover'
       },
       renderer: {
