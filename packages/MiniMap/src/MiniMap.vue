@@ -20,7 +20,7 @@ export default {
   cursor: pointer;
 }
 
-.djs-minimap .toggle:before {
+.djs-minimap.open .toggle:after {
   font-family: "bpmn";
   content: '\e805' !important;
   display: block;
