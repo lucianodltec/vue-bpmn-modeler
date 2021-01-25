@@ -56,9 +56,10 @@ export default {
         }
       },
       contextPad (element) {
+        console.log('contextPad', element)
         const res = {}
 
-        if (element.$type !== 'bpmn:EndEvent') {
+        if (!['bpmn:SequenceFlow', 'bpmn:EndEvent'].includes(element.$type)) {
           res['append.Gateway'] = {
             type: 'bpmn:Gateway',
             className: 'bpmn-icon-gateway-none',

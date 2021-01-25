@@ -75,7 +75,7 @@ export default function (configFn) {
         })
       }
 
-      if (!is(businessObject, 'bpmn:EndEvent')) {
+      if (!is(businessObject, 'bpmn:EndEvent') && !is(businessObject, 'bpmn:SequenceFlow')) {
         assign(actions, {
           'append.end-event': appendAction({
               type: 'bpmn:EndEvent',
@@ -106,12 +106,14 @@ export default function (configFn) {
         }
       })
 
-      assign(actions, {
-        'append.text-annotation': appendAction({
-          type: 'bpmn:TextAnnotation',
-          className: 'bpmn-icon-text-annotation'
+      if (!is(businessObject, 'bpmn:SequenceFlow')) {
+        assign(actions, {
+          'append.text-annotation': appendAction({
+            type: 'bpmn:TextAnnotation',
+            className: 'bpmn-icon-text-annotation'
+          })
         })
-      })
+      }
 
       return actions
     }
