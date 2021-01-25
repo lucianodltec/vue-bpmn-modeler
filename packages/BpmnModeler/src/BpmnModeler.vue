@@ -1,6 +1,7 @@
 <template>
   <div ref="container" class="containers">
     <div ref="canvas" class="canvas"></div>
+    <mini-map/>
   </div>
 </template>
 
@@ -10,9 +11,11 @@ import CustomTranslateFactory from "../../CustomTranslateFactory.js";
 import CustomRendererModuleFactory from "../../CustomRendererFactory.js";
 import minimapModule from "diagram-js-minimap";
 import { debounce } from "min-dash";
+import MiniMap from '../../MiniMap/src/MiniMap'
 
 export default {
   name: "BpmnModeler",
+  components: { MiniMap },
   props: {
     diagramXML: String,
     moddleExtensions: { type: Object },

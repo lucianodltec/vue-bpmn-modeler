@@ -39,8 +39,8 @@ export default {
         'Append Gateway': 'Decisão',
         'Append EndEvent': 'Fim',
         'Append Chat': 'Chat',
-        'Open minimap': 'MAPA',
-        'Close minimap': 'FECHAR',
+        'Open minimap': ' ',
+        'Close minimap': 'X',
         'Remove': 'Remover'
       },
       renderer: {
@@ -153,4 +153,6 @@ export default {
   border: 1px solid rgb(0, 128, 0);
   border-radius: 4px;
 }
+
+
 </style>
