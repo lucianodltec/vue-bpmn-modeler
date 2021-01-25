@@ -12,7 +12,7 @@ export default {
 
 .djs-minimap:not(.open) .toggle:before {
   font-family: "bpmn";
-  content: '\e819';
+  content: '\e819' !important;
   display: block;
   float: left;
   margin: 0px 0px 10px 0px;
@@ -22,7 +22,7 @@ export default {
 
 .djs-minimap .toggle:before {
   font-family: "bpmn";
-  content: '\e805';
+  content: '\e805' !important;
   display: block;
   float: left;
   margin: 4px 4px 10px 2px;
